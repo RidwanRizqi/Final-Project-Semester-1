@@ -19,14 +19,55 @@ public class Main {
             {10,10,10,10,10,10,10,10,10,10}};    // tiket reguler
     static int[] daftarKursi = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
     public static void main(String[] args) {
+
+            System.out.println("============================================");
+            System.out.println("|  ========   Selamat datang   ==========  |");
+            System.out.println("|  |            Di Bioskop              |  |");
+            System.out.println("|  |              Ridwan                |  |");
+            System.out.println("|  |====================================|  |");
+            System.out.println("============================================");
+            System.out.println();
+            menu();
+        }
+
+
+    private static void menu() {
+        int menu;
+        String konfirmasi;
+        boolean kondisi = true;
+        while (kondisi) {
+            System.out.println("============================================");
+            System.out.println("|  ==============   MENU   ==============  |");
+            System.out.println("|  | [1] Masuk Sebagai Pelanggan        |  |");
+            System.out.println("|  | [2] Masuk Sebagai Pegawai          |  |");
+            System.out.println("|  |====================================|  |");
+            System.out.println("============================================");
+            System.out.print("Silahkan memilih menu diatas dengan cara memasukkan angka 1/2 : ");
+            menu = input.nextInt();
+            switch (menu) {
+                case 1 -> pelanggan();
+                case 2 -> pegawai();
+                default -> {
+                    System.out.println("Masukkan yang anda masukkan salah!");
+                }
+            }
+            System.out.println("Apakah masih ada keperluan lain? (Ya/Tidak) : ");
+            konfirmasi = input.next();
+            if (konfirmasi.equalsIgnoreCase("Ya")) {
+                kondisi = true;
+            } else if (konfirmasi.equalsIgnoreCase("Tidak")) {
+                kondisi = false;
+            } else {
+                System.out.println("Inputan yang anda masukkan salah! Program akan ditutup");
+                kondisi = false;
+            }
+        }
+    }
+    private static void pelanggan() {
         boolean kondisi = true;
         String dialogKonfirmasiMenu;
         int menu;
 
-        System.out.println("============================================");
-        System.out.println("|=====  Program Kasir Bioskop Ridwan  =====|");
-        System.out.println("============================================");
-        System.out.println();
         while (kondisi) {
             System.out.println("============================================");
             System.out.println("|  ==============   MENU   ==============  |");
@@ -35,6 +76,7 @@ public class Main {
             System.out.println("|  | [3] Kursi Yang Tersedia            |  |");
             System.out.println("|  | [4] Harga Tiket                    |  |");
             System.out.println("|  | [5] Daftar Sebagai Member          |  |");
+            System.out.println("|  | [6] Kembali ke Menu Sebelumnya     |  |");
             System.out.println("|  |====================================|  |");
             System.out.println("============================================");
             System.out.print("Silahkan memilih menu diatas dengan cara memasukkan angka 1 sampai 5 : ");
@@ -45,6 +87,7 @@ public class Main {
                 case 3 -> kursiReady();
                 case 4 -> hargaTiket();
                 case 5 -> daftarMember();
+                case 6 -> menu();
                 default -> System.out.println("Mohon maaf input yang anda masukkan salah");
             }
             System.out.print("Apakah masih ada transaksi lain? (Ya/Tidak) : ");
@@ -59,6 +102,74 @@ public class Main {
             }
             System.out.println();
         }
+    }
+
+    private static void pegawai() {
+        int menu;
+        System.out.println("============================================");
+        System.out.println("|  ==============   MENU   ==============  |");
+        System.out.println("|  | [1] Update Stock Tiket             |  |");
+        System.out.println("|  | [2] Update Kursi Kosong            |  |");
+        System.out.println("|  | [3] Update Film                    |  |");
+        System.out.println("|  | [4] Riwayat Transaksi              |  |");
+        System.out.println("|  | [5] Daftar Nomor Unik Member       |  |");
+        System.out.println("|  | [6] Kembali ke Menu Sebelumnya     |  |");
+        System.out.println("|  |====================================|  |");
+        System.out.println("============================================");
+        System.out.print("Silahkan memilih menu diatas dengan cara memasukkan angka 1 sampai 5 : ");
+        menu = input.nextInt();
+        switch (menu) {
+            case 1 -> updateStockTiket();
+            case 2 -> updateKursi();
+            case 3 -> updateFilm();
+            case 4 -> riwayat();
+            case 5 -> daftarNomorMember();
+            case 6 -> menu();
+            default -> System.out.println("Mohon maaf input yang anda masukkan salah");
+        }
+    }
+
+    private static void updateStockTiket() {
+        daftarFilm();
+        int[] index = new int[2];
+        int value;
+        System.out.print("Stock tiket film apa yang ingin diperbarui ? (masukkan angka 0 sampai 10) :");
+        index[0] = input.nextInt();
+        System.out.print("Tiket premium atau reguler ? (0 untuk premium/ 1 untuk reguler) :");
+        index[1] = input.nextInt();
+        System.out.print("Masukkan nilai yang ingin anda ganti : ");
+        value = input.nextInt();
+        stockTicket[index[1]][index[0] - 1] = value;
+        daftarFilm();
+    }
+
+    private static void updateKursi() {
+        kursiReady();
+        for (int i = 0; i < daftarKursi.length; i++) {
+            daftarKursi[i] = i;
+        }
+        System.out.println("Jumlah kursi sudah ready semua ");
+        kursiReady();
+    }
+
+    private static void updateFilm() {
+        daftarFilm();
+        int index;
+        String judulFilm;
+        System.out.print("Pilih film yang ingin diganti : (angka 1 sampai 10) : ");
+        index = input.nextInt() - 1;
+        System.out.print("Masukkan judul film yang baru : ");
+        judulFilm = input.next();
+        daftarFilm[index] = judulFilm;
+        daftarFilm();
+    }
+
+    private static void riwayat() {
+
+    }
+
+    private static void daftarNomorMember() {
+
     }
 
     private static void pembelianTiket(){
@@ -159,7 +270,8 @@ public class Main {
         System.out.println("|========  Daftar Film Minggu Ini  ========|");
         System.out.println("============================================");
         for (int i = 0; i < daftarFilm.length; i++){
-            System.out.println((i + 1) + " " + daftarFilm[i]);
+            System.out.println("[" + (i + 1) + "]" + " " + daftarFilm[i]);
+            System.out.println("Stock tiket premium = " + stockTicket[0][i] + " Stock tiket reguler = " + stockTicket[1][i]);
         }
     }
 

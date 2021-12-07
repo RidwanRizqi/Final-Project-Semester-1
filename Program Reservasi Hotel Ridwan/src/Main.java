@@ -231,19 +231,49 @@ public class Main {
 
     private static void pembayaran(float total) {
         int uang;
-        System.out.print("Masukkan nominal uang anda : Rp.");
-        uang = input.nextInt();
-        if (total - uang == 0) {
-            System.out.println("Kembalian = Rp.0");
-            System.out.println("==========Terimakasih atas kunjungannya==========");
-        } else if (total - uang > 0) {
-            System.out.println("Uang anda masih kurang sebesar Rp." + (total - uang));
-            System.out.println("Silahkan mengulangi pembayaran");
-            pembayaran(total);
-        } else  {
-            System.out.println("Kembalian = Rp." + (uang - total));
-            System.out.println("==========Terimakasih atas kunjungannya==========");
+        int menu;
+        System.out.println("=====  Jenis Pembayaran  =====");
+        System.out.println("| [1] Tunai                  |");
+        System.out.println("| [2] Transfer               |");
+        System.out.println("==============================");
+        System.out.println("Masukkan jenis pembayaran (1 atau 2) : ");
+        menu = input.nextInt();
+        switch (menu) {
+            case 1 -> {
+                System.out.print("Masukkan nominal uang anda : Rp.");
+                uang = input.nextInt();
+                if (total - uang == 0) {
+                    System.out.println("Kembalian = Rp.0");
+                    System.out.println("==========Terimakasih atas kunjungannya==========");
+                } else if (total - uang > 0) {
+                    System.out.println("Uang anda masih kurang sebesar Rp." + (total - uang));
+                    System.out.println("Silahkan mengulangi pembayaran");
+                    pembayaran(total);
+                } else  {
+                    System.out.println("Kembalian = Rp." + (uang - total));
+                    System.out.println("==========Terimakasih atas kunjungannya==========");
+                }
+            }
+
+            case 2 -> {
+                System.out.println("Nominal yang harus anda bayarkan : " + total);
+                System.out.println("Masukkan Nominal Uang Anda : ");
+                uang = input.nextInt();
+                if (total - uang == 0) {
+                    System.out.println("==========  Terimakasih atas kunjungannya  ==========");
+                } else  {
+                    System.out.println("==========  Nominal yang anda masukkan tidak sesuai  ==========");
+                    pembayaran(total);
+                }
+            }
+
+            default -> {
+                System.out.println("Masukkan yang anda masukkan salah!");
+                pembayaran(total);
+            }
         }
+
+
     }
 
     private static void pegawai() {

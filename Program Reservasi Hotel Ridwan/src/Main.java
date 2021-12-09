@@ -37,10 +37,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("============================================");
         System.out.println("=============  Selamat datang  =============");
-        System.out.println("|  |      _____   Di Hotel   _____      |  |");
-        System.out.println("|  | _____|___|    Ridwan    |___|_____ |  |");
-        System.out.println("|  | |    |   |              |   |    | |  |");
-        System.out.println("|  | |____|___|==============|___|____| |  |");
+        System.out.println("|| |      _____   Di Hotel   _____      | ||");
+        System.out.println("|| | _____|___|    Ridwan    |___|_____ | ||");
+        System.out.println("|| | |    |   |              |   |    | | ||");
+        System.out.println("|| | |____|___|==============|___|____| | ||");
         System.out.println("============================================");
         System.out.println();
         menu();
@@ -52,10 +52,10 @@ public class Main {
         boolean kondisi = true;
         while (kondisi) {
             System.out.println("============================================");
-            System.out.println("|  ==============   MENU   ==============  |");
-            System.out.println("|  | [1] Masuk Sebagai Pelanggan        |  |");
-            System.out.println("|  | [2] Masuk Sebagai Pegawai          |  |");
-            System.out.println("|  |====================================|  |");
+            System.out.println("|| ==============   MENU   ============== ||");
+            System.out.println("|| | [1] Masuk Sebagai Pelanggan        | ||");
+            System.out.println("|| | [2] Masuk Sebagai Pegawai          | ||");
+            System.out.println("|| |====================================| ||");
             System.out.println("============================================");
             System.out.print("Silahkan memilih menu diatas dengan cara memasukkan angka 1/2 : ");
             menu = input.nextInt();
@@ -85,12 +85,12 @@ public class Main {
 
         while (kondisi) {
             System.out.println("============================================");
-            System.out.println("|  ==============   MENU   ==============  |");
-            System.out.println("|  | [1] Pemesanan Tiket Hotel          |  |");
-            System.out.println("|  | [2] Daftar Jenis Kamar Hotel       |  |");
-            System.out.println("|  | [3] Nomor Kamar Yang Tersedia      |  |");
-            System.out.println("|  | [4] Kembali ke Menu Sebelumnya     |  |");
-            System.out.println("|  |====================================|  |");
+            System.out.println("|| ==============   MENU   ============== ||");
+            System.out.println("|| | [1] Pemesanan Tiket Hotel          | ||");
+            System.out.println("|| | [2] Daftar Jenis Kamar Hotel       | ||");
+            System.out.println("|| | [3] Nomor Kamar Yang Tersedia      | ||");
+            System.out.println("|| | [4] Kembali ke Menu Sebelumnya     | ||");
+            System.out.println("|| |====================================| ||");
             System.out.println("============================================");
             System.out.print("Silahkan memilih menu diatas dengan cara memasukkan angka 1 sampai 4 : ");
             menu = input.nextInt();
@@ -164,17 +164,13 @@ public class Main {
             System.out.println();
             System.out.println("Diatas adalah daftar kamar yang ready silahkan masukkan angka nomor kamar : ");
             nomorKamardiPesan[counter[0]] = input.nextInt();
-
-            for (int i = 0; i < kamarReady[counter[0]].length; i++) {
-                if (nomorKamardiPesan[counter[0]] == kamarReady[jenisKamardiPesan[counter[0]]][i]) {
-                    kamarReady[jenisKamardiPesan[counter[0]]][i] = 0;
-                    break;
-                } else if (nomorKamardiPesan[counter[0]] != kamarReady[jenisKamardiPesan[counter[0]]][i] && i != 0) {
-                    System.out.println("Kamar yang anda pesan tidak tersedia! Program akan di tutup!");
-                    System.exit(0);
-                }
-
+            if (nomorKamardiPesan[counter[0]] == kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1]) {
+                kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1] = 0;
+            } else if (nomorKamardiPesan[counter[0]] != kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1]) {
+                System.out.println("Kamar yang anda pesan tidak tersedia! Program akan di tutup!");
+                System.exit(0);
             }
+
             riwayatNomorKamar[counter[0]][nomorUrut] = nomorKamardiPesan[counter[0]];
 
             System.out.println("Anda ingin menginap berapa hari ? (misal 2 hari masukkan angka 2) : ");
@@ -189,7 +185,8 @@ public class Main {
             } else if (konfirmasiPesanLagi.equalsIgnoreCase("Tidak")) {
                 kondisi = false;
             } else {
-                System.out.println("Inputan yang anda masukkan salah silahkan mengulang dari awal !");
+                System.out.println("Inputan yang anda masukkan salah program akan di tutup !");
+                System.exit(0);
             }
 
         }

@@ -35,7 +35,14 @@ public class Main {
 
 
     public static void main(String[] args) {
-        System.out.println("Program pemesanan tiket hotel ridwan");
+        System.out.println("============================================");
+        System.out.println("=============  Selamat datang  =============");
+        System.out.println("|  |      _____   Di Hotel   _____      |  |");
+        System.out.println("|  | _____|___|    Ridwan    |___|_____ |  |");
+        System.out.println("|  | |    |   |              |   |    | |  |");
+        System.out.println("|  | |____|___|==============|___|____| |  |");
+        System.out.println("============================================");
+        System.out.println();
         menu();
     }
 
@@ -77,7 +84,6 @@ public class Main {
         int menu;
 
         while (kondisi) {
-            System.out.println("Menu Pembeli");
             System.out.println("============================================");
             System.out.println("|  ==============   MENU   ==============  |");
             System.out.println("|  | [1] Pemesanan Tiket Hotel          |  |");
@@ -119,7 +125,9 @@ public class Main {
         String konfirmasiPesanLagi, tanggal;
         float diskonMember = 0, total = 0;
 
-        System.out.println("Pembelian Tiket");
+        System.out.println("============================================");
+        System.out.println("|============  Pemesanan Tiket  ===========|");
+        System.out.println("============================================");
         System.out.print("Masukkan nama : ");
         nama = input.next();
         riwayatPemesan[nomorUrut] = nama;
@@ -147,7 +155,6 @@ public class Main {
             System.out.println("Silahkan memilih jenis kamar yang anda inginkan dengan mamasukkan angka 1 sampai 4");
             jenisKamardiPesan[counter[0]] = input.nextInt() -1;
             riwayatJenisKamar[counter[0]][nomorUrut] = jenisKamarHotel[jenisKamardiPesan[counter[0]]];
-
             System.out.println("Kamar ready jenis " + jenisKamarHotel[jenisKamardiPesan[counter[0]]]);
             for (int i = 0; i < kamarReady[jenisKamardiPesan[counter[0]]].length; i++) {
                 if (kamarReady[jenisKamardiPesan[counter[0]]][i] != 0) {
@@ -157,14 +164,16 @@ public class Main {
             System.out.println();
             System.out.println("Diatas adalah daftar kamar yang ready silahkan masukkan angka nomor kamar : ");
             nomorKamardiPesan[counter[0]] = input.nextInt();
+
             for (int i = 0; i < kamarReady[counter[0]].length; i++) {
                 if (nomorKamardiPesan[counter[0]] == kamarReady[jenisKamardiPesan[counter[0]]][i]) {
                     kamarReady[jenisKamardiPesan[counter[0]]][i] = 0;
                     break;
-                } else {
-                    System.out.println("Kamar yang anda pesan tidak tersedia! silahkan ulangi dari awal!");
-                    menu();
+                } else if (nomorKamardiPesan[counter[0]] != kamarReady[jenisKamardiPesan[counter[0]]][i] && i != 0) {
+                    System.out.println("Kamar yang anda pesan tidak tersedia! Program akan di tutup!");
+                    System.exit(0);
                 }
+
             }
             riwayatNomorKamar[counter[0]][nomorUrut] = nomorKamardiPesan[counter[0]];
 
@@ -232,6 +241,7 @@ public class Main {
     private static void pembayaran(float total) {
         int uang;
         int menu;
+        System.out.println();
         System.out.println("=====  Jenis Pembayaran  =====");
         System.out.println("| [1] Tunai                  |");
         System.out.println("| [2] Transfer               |");
@@ -336,8 +346,11 @@ public class Main {
         System.out.println("============  Riwayat Transaksi  ===========");
         System.out.println("============================================");
         System.out.println("============================================");
+        System.out.println();
         for (int i = 0; i < nomorUrut; i++) {
-            System.out.println("========  Transaksi ke " + (i+1) + "  ========");
+            System.out.println("============================================");
+            System.out.println("|============  Transaksi ke " + (i+1) + "  ============|");
+            System.out.println("============================================");
             System.out.println("Nama          : " + riwayatPemesan[i]);
             System.out.println("Tanggal       : " + riwayatTanggal[i]);
             for (int j = 0; j < counterRiwayat[i] + 1; j++) {

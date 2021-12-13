@@ -4,8 +4,8 @@ public class Main {
     static Scanner input = new Scanner(System.in);
     static String[] jenisKamarHotel = {
             "Standard Room",
-            "Deluxe Room",
-            "Suite Room" ,
+            "Deluxe Room  ",
+            "Suite Room   ",
             "President Room"
 
     };
@@ -193,20 +193,22 @@ public class Main {
 
 
         System.out.println();
-        System.out.println("Berikut adalah tagihan anda : ");
-        System.out.println("Nama : " + nama);
-        System.out.println("Tanggal : " + tanggal);
-        System.out.println("=======================");
+        System.out.println("======================================");
+        System.out.println("|| Berikut adalah tagihan anda :\t||");
+        System.out.println("|| Nama : " + nama + "          \t\t\t||");
+        System.out.println("|| Tanggal : " + tanggal + "    \t\t\t||");
+        System.out.println("======================================");
         for (int i = 0; i < (counter[0] + 1); i++) {
-            System.out.println("Jenis Kamar : " + jenisKamarHotel[jenisKamardiPesan[i]]);
-            System.out.println("Nomor Kamar : " + nomorKamardiPesan[i]);
-            System.out.println("Lama Menginap : " + lamaMenginap[i] + " hari");
-            System.out.println("Harga : Rp." + riwayatHarga[i][nomorUrut]);
-            System.out.println("=======================");
+            System.out.println("|| Jenis Kamar : " + jenisKamarHotel[jenisKamardiPesan[i]] + "\t\t||");
+            System.out.println("|| Nomor Kamar : " + nomorKamardiPesan[i] + "\t\t\t\t\t||");
+            System.out.println("|| Lama Menginap : " + lamaMenginap[i] + " hari\t\t\t||");
+            System.out.println("|| Harga : Rp." + riwayatHarga[i][nomorUrut] + "\t\t\t\t||");
+            System.out.println("======================================");
             total += riwayatHarga[i][nomorUrut];
         }
-        System.out.println("Diskon Member : " + riwayatDiskonMember[nomorUrut]);
-        System.out.println("Total : Rp." + (total - (total * diskonMember)));
+        System.out.println("|| Diskon Member : " + riwayatDiskonMember[nomorUrut] + "\t\t\t\t||");
+        System.out.println("|| Total : Rp." + (total - (total * diskonMember)) + "\t\t\t\t||");
+        System.out.println("======================================");
         pembayaran((total - (total * diskonMember)));
         riwayatTotal[nomorUrut] = (total - (total * diskonMember));
         nomorUrut++;
@@ -240,8 +242,8 @@ public class Main {
         int menu;
         System.out.println();
         System.out.println("=====  Jenis Pembayaran  =====");
-        System.out.println("| [1] Tunai                  |");
-        System.out.println("| [2] Transfer               |");
+        System.out.println("|| [1] Tunai                ||");
+        System.out.println("|| [2] Transfer             ||");
         System.out.println("==============================");
         System.out.println("Masukkan jenis pembayaran (1 atau 2) : ");
         menu = input.nextInt();
@@ -339,26 +341,27 @@ public class Main {
     }
 
     private static void riwayatTransaksi() {
-        System.out.println("============================================");
-        System.out.println("============  Riwayat Transaksi  ===========");
-        System.out.println("============================================");
-        System.out.println("============================================");
+        System.out.println("==============================================");
+        System.out.println("=============  Riwayat Transaksi  ============");
+        System.out.println("==============================================");
+        System.out.println("==============================================");
         System.out.println();
         for (int i = 0; i < nomorUrut; i++) {
-            System.out.println("============================================");
-            System.out.println("|============  Transaksi ke " + (i+1) + "  ============|");
-            System.out.println("============================================");
-            System.out.println("Nama          : " + riwayatPemesan[i]);
-            System.out.println("Tanggal       : " + riwayatTanggal[i]);
+            System.out.println("==============================================");
+            System.out.println("|=============  Transaksi ke " + (i+1) + "  =============|");
+            System.out.println("==============================================");
+            System.out.println("|| Nama          : " + riwayatPemesan[i] + "\t\t\t\t\t||");
+            System.out.println("|| Tanggal       : " + riwayatTanggal[i] + "\t\t\t\t||");
             for (int j = 0; j < counterRiwayat[i] + 1; j++) {
-                System.out.println("Jenis Kamar   : " + riwayatJenisKamar[j][i]);
-                System.out.println("Nomor Kamar   : " + riwayatNomorKamar[j][i]);
-                System.out.println("Lama Menginap : " + riwayatLamaMenginap[j][i] + " hari");
-                System.out.println("Harga         : Rp." + riwayatHarga[j][i]);
-                System.out.println("============================================");
+                System.out.println("|| Jenis Kamar   : " + riwayatJenisKamar[j][i] + "\t\t\t||");
+                System.out.println("|| Nomor Kamar   : " + riwayatNomorKamar[j][i] + "\t\t\t\t\t\t||");
+                System.out.println("|| Lama Menginap : " + riwayatLamaMenginap[j][i] + " hari\t\t\t\t\t||");
+                System.out.println("|| Harga         : Rp." + riwayatHarga[j][i] + "\t\t\t\t||");
+                System.out.println("==============================================");
             }
-            System.out.println("Diskon Member : " + riwayatDiskonMember[i]);
-            System.out.println("Total         : Rp." + riwayatTotal[i]);
+            System.out.println("|| Diskon Member : " + riwayatDiskonMember[i] + "\t\t\t\t\t\t||");
+            System.out.println("|| Total         : Rp." + riwayatTotal[i] + "\t\t\t\t||");
+            System.out.println("==============================================");
             System.out.println();
         }
     }

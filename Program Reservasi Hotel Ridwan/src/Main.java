@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     static Scanner input = new Scanner(System.in);
     static String[] jenisKamarHotel = {
-            "Standard Room",
-            "Deluxe Room  ",
-            "Suite Room   ",
+            "Standard Room ",
+            "Deluxe Room   ",
+            "Suite Room    ",
             "President Room"
 
     };
@@ -25,7 +25,6 @@ public class Main {
     static int[][] riwayatHarga = new int[40][100];
     static float[] riwayatTotal = new float[100];
     static int nomorUrut;
-    static int[] counter = {0};
     static int[][] kamarReady = {
             {1,2,3,4,5,6,7,8,9,10},
             {1,2,3,4,5,6,7,8,9,10},
@@ -37,10 +36,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("============================================");
         System.out.println("=============  Selamat datang  =============");
-        System.out.println("|| |      _____   Di Hotel   _____      | ||");
-        System.out.println("|| | _____|___|    Ridwan    |___|_____ | ||");
-        System.out.println("|| | |    |   |              |   |    | | ||");
-        System.out.println("|| | |____|___|==============|___|____| | ||");
+        System.out.println("||        _____   Di Hotel   _____        ||");
+        System.out.println("||   _____|___|    Ridwan    |___|_____   ||");
+        System.out.println("||   |    |   |              |   |    |   ||");
+        System.out.println("||   |____|___|==============|___|____|   ||");
         System.out.println("============================================");
         System.out.println();
         menu();
@@ -70,10 +69,11 @@ public class Main {
             if (konfirmasi.equalsIgnoreCase("Ya")) {
                 kondisi = true;
             } else if (konfirmasi.equalsIgnoreCase("Tidak")) {
-                kondisi = false;
+                System.out.println("==========Terimakasih atas kunjungannya==========");
+                System.exit(0);
             } else {
                 System.out.println("Inputan yang anda masukkan salah! Program akan ditutup");
-                kondisi = false;
+                System.exit(0);
             }
         }
     }
@@ -107,10 +107,11 @@ public class Main {
             if (dialogKonfirmasiMenu.equalsIgnoreCase("Ya")) {
                 kondisi = true;
             } else if (dialogKonfirmasiMenu.equalsIgnoreCase("Tidak")) {
-                kondisi = false;
+                System.out.println("==========Terimakasih atas kunjungannya==========");
+                menu();
             } else {
                 System.out.println("Masukkan yang anda masukkan salah! program akan di tutup");
-                kondisi = false;
+                System.exit(0);
             }
             System.out.println();
         }
@@ -124,9 +125,10 @@ public class Main {
         int[] lamaMenginap = new int[40];
         String konfirmasiPesanLagi, tanggal;
         float diskonMember = 0, total = 0;
+        int counter = 0;
 
         System.out.println("============================================");
-        System.out.println("|============  Pemesanan Tiket  ===========|");
+        System.out.println("||             Pemesanan Tiket            ||");
         System.out.println("============================================");
         System.out.print("Masukkan nama : ");
         nama = input.next();
@@ -153,34 +155,34 @@ public class Main {
             System.out.println();
             System.out.println("Diatas adalah daftar jenis dan harga kamar kami");
             System.out.println("Silahkan memilih jenis kamar yang anda inginkan dengan mamasukkan angka 1 sampai 4");
-            jenisKamardiPesan[counter[0]] = input.nextInt() -1;
-            riwayatJenisKamar[counter[0]][nomorUrut] = jenisKamarHotel[jenisKamardiPesan[counter[0]]];
-            System.out.println("Kamar ready jenis " + jenisKamarHotel[jenisKamardiPesan[counter[0]]]);
-            for (int i = 0; i < kamarReady[jenisKamardiPesan[counter[0]]].length; i++) {
-                if (kamarReady[jenisKamardiPesan[counter[0]]][i] != 0) {
-                    System.out.print("[" + kamarReady[jenisKamardiPesan[counter[0]]][i] + "] ");
+            jenisKamardiPesan[counter] = input.nextInt() -1;
+            riwayatJenisKamar[counter][nomorUrut] = jenisKamarHotel[jenisKamardiPesan[counter]];
+            System.out.println("Kamar ready jenis " + jenisKamarHotel[jenisKamardiPesan[counter]]);
+            for (int i = 0; i < kamarReady[jenisKamardiPesan[counter]].length; i++) {
+                if (kamarReady[jenisKamardiPesan[counter]][i] != 0) {
+                    System.out.print("[" + kamarReady[jenisKamardiPesan[counter]][i] + "] ");
                 }
             }
             System.out.println();
             System.out.println("Diatas adalah daftar kamar yang ready silahkan masukkan angka nomor kamar : ");
-            nomorKamardiPesan[counter[0]] = input.nextInt();
-            if (nomorKamardiPesan[counter[0]] == kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1]) {
-                kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1] = 0;
-            } else if (nomorKamardiPesan[counter[0]] != kamarReady[jenisKamardiPesan[counter[0]]][nomorKamardiPesan[counter[0]] - 1]) {
+            nomorKamardiPesan[counter] = input.nextInt();
+            if (nomorKamardiPesan[counter] == kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1]) {
+                kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1] = 0;
+            } else if (nomorKamardiPesan[counter] != kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1]) {
                 System.out.println("Kamar yang anda pesan tidak tersedia! Program akan di tutup!");
                 System.exit(0);
             }
 
-            riwayatNomorKamar[counter[0]][nomorUrut] = nomorKamardiPesan[counter[0]];
+            riwayatNomorKamar[counter][nomorUrut] = nomorKamardiPesan[counter];
 
             System.out.println("Anda ingin menginap berapa hari ? (misal 2 hari masukkan angka 2) : ");
-            lamaMenginap[counter[0]] = input.nextInt();
-            riwayatLamaMenginap[counter[0]][nomorUrut] = lamaMenginap[counter[0]];
-            riwayatHarga[counter[0]][nomorUrut] = (hargaKamarHotel[jenisKamardiPesan[counter[0]]] * lamaMenginap[counter[0]]);
+            lamaMenginap[counter] = input.nextInt();
+            riwayatLamaMenginap[counter][nomorUrut] = lamaMenginap[counter];
+            riwayatHarga[counter][nomorUrut] = (hargaKamarHotel[jenisKamardiPesan[counter]] * lamaMenginap[counter]);
             System.out.println("Apakah anda ingin memesan tiket lagi ? (Ya/Tidak) :");
             konfirmasiPesanLagi = input.next();
             if (konfirmasiPesanLagi.equalsIgnoreCase("Ya")) {
-                counter[0]++;
+                counter++;
                 counterRiwayat[nomorUrut]++;
             } else if (konfirmasiPesanLagi.equalsIgnoreCase("Tidak")) {
                 kondisi = false;
@@ -198,7 +200,7 @@ public class Main {
         System.out.println("|| Nama : " + nama + "          \t\t\t||");
         System.out.println("|| Tanggal : " + tanggal + "    \t\t\t||");
         System.out.println("======================================");
-        for (int i = 0; i < (counter[0] + 1); i++) {
+        for (int i = 0; i < (counter + 1); i++) {
             System.out.println("|| Jenis Kamar : " + jenisKamarHotel[jenisKamardiPesan[i]] + "\t\t||");
             System.out.println("|| Nomor Kamar : " + nomorKamardiPesan[i] + "\t\t\t\t\t||");
             System.out.println("|| Lama Menginap : " + lamaMenginap[i] + " hari\t\t\t||");
@@ -212,22 +214,21 @@ public class Main {
         pembayaran((total - (total * diskonMember)));
         riwayatTotal[nomorUrut] = (total - (total * diskonMember));
         nomorUrut++;
-        counter[0] = 0;
     }
 
     private static void daftarJenisKamar() {
-        System.out.println("Jenis Kamar Dan Harga");
         System.out.println("============================================");
-        System.out.println("| [1] Standard Room    = Rp." + hargaKamarHotel[0] + "/hari");
-        System.out.println("| [2] Deluxe Room      = Rp." + hargaKamarHotel[1] + "/hari");
-        System.out.println("| [3] Suite Room       = Rp." + hargaKamarHotel[2] + "/hari");
-        System.out.println("| [4] President Room   = Rp." + hargaKamarHotel[3] + "/hari");
+        System.out.println("||         Jenis Kamar Dan Harga          ||");
+        System.out.println("============================================");
+        for (int i = 0; i < jenisKamarHotel.length; i++) {
+            System.out.println("|| [" + (i+1) + "] " + jenisKamarHotel[i] + "    = Rp." + hargaKamarHotel[i] + "/hari ||");
+        }
         System.out.println("============================================");
     }
 
     private static void daftarKamarReady() {
         for (int i = 0; i < kamarReady.length; i++) {
-            System.out.println("Kamar ready jenis [" + (i+1) + "] " + jenisKamarHotel[i] + ":");
+            System.out.print("Kamar ready jenis [" + (i+1) + "] " + jenisKamarHotel[i] + ": ");
             for (int j = 0; j < kamarReady[0].length; j++) {
                 if (kamarReady[i][j] != 0) {
                     System.out.print("[" + kamarReady[i][j] + "] ");
@@ -241,7 +242,9 @@ public class Main {
         int uang;
         int menu;
         System.out.println();
-        System.out.println("=====  Jenis Pembayaran  =====");
+        System.out.println("==============================");
+        System.out.println("||     Jenis Pembayaran     ||");
+        System.out.println("||==========================||");
         System.out.println("|| [1] Tunai                ||");
         System.out.println("|| [2] Transfer             ||");
         System.out.println("==============================");
@@ -310,9 +313,9 @@ public class Main {
     private static void updateHargaKamar() {
         int key;
         System.out.println("============================================");
-        System.out.println("============  Update Harga Kamar  ==========");
+        System.out.println("||            Update Harga Kamar          ||");
         System.out.println("============================================");
-        System.out.println("============================================");
+
         System.out.println();
         daftarJenisKamar();
         System.out.print("Kamar jenis apa yang ingin diganti harganya ? (masukkan angka 1 sampai 4) : ");
@@ -326,8 +329,7 @@ public class Main {
     private static void updateNomorKamar() {
         int key1, key2;
         System.out.println("============================================");
-        System.out.println("============  Update Nomor Kamar  ==========");
-        System.out.println("============================================");
+        System.out.println("||            Update Nomor Kamar          ||");
         System.out.println("============================================");
         System.out.println();
         daftarKamarReady();
@@ -342,8 +344,7 @@ public class Main {
 
     private static void riwayatTransaksi() {
         System.out.println("==============================================");
-        System.out.println("=============  Riwayat Transaksi  ============");
-        System.out.println("==============================================");
+        System.out.println("||             Riwayat Transaksi            ||");
         System.out.println("==============================================");
         System.out.println();
         for (int i = 0; i < nomorUrut; i++) {
@@ -352,6 +353,7 @@ public class Main {
             System.out.println("==============================================");
             System.out.println("|| Nama          : " + riwayatPemesan[i] + "\t\t\t\t\t||");
             System.out.println("|| Tanggal       : " + riwayatTanggal[i] + "\t\t\t\t||");
+            System.out.println("==============================================");
             for (int j = 0; j < counterRiwayat[i] + 1; j++) {
                 System.out.println("|| Jenis Kamar   : " + riwayatJenisKamar[j][i] + "\t\t\t||");
                 System.out.println("|| Nomor Kamar   : " + riwayatNomorKamar[j][i] + "\t\t\t\t\t\t||");

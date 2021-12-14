@@ -7,7 +7,6 @@ public class Main {
             "Deluxe Room   ",
             "Suite Room    ",
             "President Room"
-
     };
     static int[] hargaKamarHotel = {
             200_000,
@@ -108,6 +107,7 @@ public class Main {
                 kondisi = true;
             } else if (dialogKonfirmasiMenu.equalsIgnoreCase("Tidak")) {
                 System.out.println("==========Terimakasih atas kunjungannya==========");
+                System.out.println();
                 menu();
             } else {
                 System.out.println("Masukkan yang anda masukkan salah! program akan di tutup");
@@ -136,11 +136,12 @@ public class Main {
         System.out.print("Masukkan tanggal (contoh 12-06-2021) : ");
         tanggal = input.next();
         riwayatTanggal[nomorUrut] = tanggal;
-        System.out.print("Selamat datang " + nama + " ,apakah anda memiliki kartu member hotel kami? (Ya/Tidak) : ");
+        System.out.println("Selamat datang " + nama + " di hotel kami");
+        System.out.print( "apakah anda memiliki kartu member hotel kami? (Ya/Tidak) : ");
         member = input.next();
         if (member.equalsIgnoreCase("Ya")) {
-            diskonMember = 0.2f;
-            riwayatDiskonMember[nomorUrut] = "20%";
+            diskonMember = 0.1f;
+            riwayatDiskonMember[nomorUrut] = "10%";
         } else if (member.equalsIgnoreCase("Tidak")) {
             diskonMember = 0;
             riwayatDiskonMember[nomorUrut] = "0%";
@@ -156,6 +157,10 @@ public class Main {
             System.out.println("Diatas adalah daftar jenis dan harga kamar kami");
             System.out.println("Silahkan memilih jenis kamar yang anda inginkan dengan mamasukkan angka 1 sampai 4");
             jenisKamardiPesan[counter] = input.nextInt() -1;
+            if (jenisKamardiPesan[counter] > 3) {
+                System.out.println("Masukkan yang anda masukkan salah, program akan di tutup!");
+                System.exit(0);
+            }
             riwayatJenisKamar[counter][nomorUrut] = jenisKamarHotel[jenisKamardiPesan[counter]];
             System.out.println("Kamar ready jenis " + jenisKamarHotel[jenisKamardiPesan[counter]]);
             for (int i = 0; i < kamarReady[jenisKamardiPesan[counter]].length; i++) {
@@ -166,6 +171,10 @@ public class Main {
             System.out.println();
             System.out.println("Diatas adalah daftar kamar yang ready silahkan masukkan angka nomor kamar : ");
             nomorKamardiPesan[counter] = input.nextInt();
+            if (nomorKamardiPesan[counter] > 10) {
+                System.out.println("Kamar yang anda pesan tidak tersedia! Program akan di tutup!");
+                System.exit(0);
+            }
             if (nomorKamardiPesan[counter] == kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1]) {
                 kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1] = 0;
             } else if (nomorKamardiPesan[counter] != kamarReady[jenisKamardiPesan[counter]][nomorKamardiPesan[counter] - 1]) {
@@ -192,8 +201,6 @@ public class Main {
             }
 
         }
-
-
         System.out.println();
         System.out.println("======================================");
         System.out.println("|| Berikut adalah tagihan anda :\t||");
@@ -228,7 +235,7 @@ public class Main {
 
     private static void daftarKamarReady() {
         for (int i = 0; i < kamarReady.length; i++) {
-            System.out.print("Kamar ready jenis [" + (i+1) + "] " + jenisKamarHotel[i] + ": ");
+            System.out.print("Kamar ready jenis [" + (i+1) + "] " + jenisKamarHotel[i] + " : ");
             for (int j = 0; j < kamarReady[0].length; j++) {
                 if (kamarReady[i][j] != 0) {
                     System.out.print("[" + kamarReady[i][j] + "] ");
@@ -252,11 +259,13 @@ public class Main {
         menu = input.nextInt();
         switch (menu) {
             case 1 -> {
+                System.out.println("Nominal yang harus anda bayarkan : " + total);
                 System.out.print("Masukkan nominal uang anda : Rp.");
                 uang = input.nextInt();
                 if (total - uang == 0) {
                     System.out.println("Kembalian = Rp.0");
                     System.out.println("==========Terimakasih atas kunjungannya==========");
+                    System.out.println();
                 } else if (total - uang > 0) {
                     System.out.println("Uang anda masih kurang sebesar Rp." + (total - uang));
                     System.out.println("Silahkan mengulangi pembayaran");
@@ -264,6 +273,7 @@ public class Main {
                 } else  {
                     System.out.println("Kembalian = Rp." + (uang - total));
                     System.out.println("==========Terimakasih atas kunjungannya==========");
+                    System.out.println();
                 }
             }
 
@@ -290,6 +300,7 @@ public class Main {
 
     private static void pegawai() {
         int menu;
+        String dialogKonfirmasiMenu;
         System.out.println("============================================");
         System.out.println("|  ==============   MENU   ==============  |");
         System.out.println("|  | [1] Update Harga Kamar Hotel       |  |");
@@ -308,18 +319,35 @@ public class Main {
             case 4 -> menu();
             default -> System.out.println("Mohon maaf input yang anda masukkan salah");
         }
+        System.out.print("Apakah masih ada transaksi lain? (Ya/Tidak) : ");
+        dialogKonfirmasiMenu = input.next();
+        if (dialogKonfirmasiMenu.equalsIgnoreCase("Ya")) {
+            pegawai();
+        } else if (dialogKonfirmasiMenu.equalsIgnoreCase("Tidak")) {
+            System.out.println("==========  Sistem akan dimatikan  ==========");
+            System.exit(0);
+        } else {
+            System.out.println("Masukkan yang anda masukkan salah! program akan di tutup");
+            System.exit(0);
+        }
+        System.out.println();
     }
+
 
     private static void updateHargaKamar() {
         int key;
         System.out.println("============================================");
         System.out.println("||            Update Harga Kamar          ||");
         System.out.println("============================================");
-
         System.out.println();
         daftarJenisKamar();
         System.out.print("Kamar jenis apa yang ingin diganti harganya ? (masukkan angka 1 sampai 4) : ");
         key = input.nextInt() - 1;
+        if (key > 3) {
+            System.out.println("Mohon maaf input yang anda masukkan salah, silahkan ulangi !");
+            System.out.println();
+            updateHargaKamar();
+        }
         System.out.print("Masukkan Harga Baru : ");
         hargaKamarHotel[key] = input.nextInt();
         System.out.println("Berikut adalah data harga kamar setelah di update");
@@ -335,11 +363,20 @@ public class Main {
         daftarKamarReady();
         System.out.println("Kamar jenis apa yang ingin di update? (masukkan angka 1 sampai 4) : ");
         key1 = input.nextInt() - 1;
+        if (key1 > 3) {
+            System.out.println("Mohon maaf input yang anda masukkan salah, silahkan ulangi !");
+            System.out.println();
+            updateNomorKamar();
+        }
         System.out.println("Kamar nomor berapa yang sudah ready kembali? (masukkan angka 1 sampai 10) : ");
         key2 = input.nextInt() - 1;
+        if (key2 > 9) {
+            System.out.println("Mohon maaf input yang anda masukkan salah, silahkan ulangi !");
+            System.out.println();
+            updateNomorKamar();
+        }
         kamarReady[key1][key2] = (key2 + 1);
         daftarKamarReady();
-
     }
 
     private static void riwayatTransaksi() {
@@ -367,6 +404,4 @@ public class Main {
             System.out.println();
         }
     }
-
-
 }

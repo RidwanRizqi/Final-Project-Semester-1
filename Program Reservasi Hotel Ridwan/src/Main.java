@@ -1,3 +1,9 @@
+// Final project semester 1
+// Ridwan Caesar Rizqi Karisma Biwarni
+// 2141720183
+
+
+
 import java.util.Scanner;
 
 public class Main {
@@ -24,13 +30,12 @@ public class Main {
     static int[][] riwayatHarga = new int[40][100];
     static float[] riwayatTotal = new float[100];
     static int nomorUrut;
-    static int[][] kamarReady = {
+    static byte[][] kamarReady = {
             {1,2,3,4,5,6,7,8,9,10},
             {1,2,3,4,5,6,7,8,9,10},
             {1,2,3,4,5,6,7,8,9,10},
             {1,2,3,4,5,6,7,8,9,10},
     };
-
 
     public static void main(String[] args) {
         System.out.println("============================================");
@@ -69,7 +74,7 @@ public class Main {
                 kondisi = true;
             } else if (konfirmasi.equalsIgnoreCase("Tidak")) {
                 System.out.println("==========Terimakasih atas kunjungannya==========");
-                System.exit(0);
+                kondisi = false;
             } else {
                 System.out.println("Inputan yang anda masukkan salah! Program akan ditutup");
                 System.exit(0);
@@ -131,7 +136,8 @@ public class Main {
         System.out.println("||             Pemesanan Tiket            ||");
         System.out.println("============================================");
         System.out.print("Masukkan nama : ");
-        nama = input.next();
+        input.nextLine();
+        nama = input.nextLine();
         riwayatPemesan[nomorUrut] = nama;
         System.out.print("Masukkan tanggal (contoh 12-06-2021) : ");
         tanggal = input.next();
@@ -248,6 +254,8 @@ public class Main {
     private static void pembayaran(float total) {
         int uang;
         int menu;
+        String namaBank;
+        int noRek;
         System.out.println();
         System.out.println("==============================");
         System.out.println("||     Jenis Pembayaran     ||");
@@ -278,13 +286,18 @@ public class Main {
             }
 
             case 2 -> {
+                System.out.println("Masukkan Bank yang anda gunakan ");
+                namaBank = input.next();
+                System.out.println("Masukkan nomor rekening ");
+                noRek = input.nextInt();
                 System.out.println("Nominal yang harus anda bayarkan : " + total);
-                System.out.println("Masukkan Nominal Uang Anda : ");
+                System.out.print("Masukkan Nominal Uang Anda : ");
                 uang = input.nextInt();
                 if (total - uang == 0) {
                     System.out.println("==========  Terimakasih atas kunjungannya  ==========");
                 } else  {
                     System.out.println("==========  Nominal yang anda masukkan tidak sesuai  ==========");
+                    System.out.println("Silahkan mengulangi pembayaran");
                     pembayaran(total);
                 }
             }
@@ -375,7 +388,7 @@ public class Main {
             System.out.println();
             updateNomorKamar();
         }
-        kamarReady[key1][key2] = (key2 + 1);
+        kamarReady[key1][key2] = (byte)(key2 + 1);
         daftarKamarReady();
     }
 
